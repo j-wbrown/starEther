@@ -62,6 +62,8 @@ contract StarNotary is ERC721 {
     // Implement Task 1 lookUptokenIdToStarInfo
     function lookUptokenIdToStarInfo (uint _tokenId) public view returns (string memory) {
         //1. You should return the Star saved in tokenIdToStarInfo mapping
+        require(tokenIdToStarInfo[_tokenId], "token does not exist");
+        return tokenIdToStarInfo[_tokenId];
     }
 
     // Implement Task 1 Exchange Stars function
