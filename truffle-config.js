@@ -22,11 +22,11 @@
  *
  */
 
-// const HDWallet = require('truffle-hdwallet-provider');
-// const infuraKey = "fj4jll3k.....";
+const HDWallet = require('truffle-hdwallet-provider');
+const infuraKey = "968706a39061468b839f38ffc94b7416";
 //
-// const fs = require('fs');
-// const mnemonic = fs.readFileSync(".secret").toString().trim();
+const fs = require('fs');
+const mnemonic = fs.readFileSync(".secret").toString().trim();
 
 module.exports = {
   /**
@@ -62,6 +62,12 @@ module.exports = {
       // websockets: true        // Enable EventEmitter interface for web3 (default: false)
     // },
 
+    rinkeby: {
+      provider: () => new HDWalletProvider(mnemonic, `https://rinkeby.infura.io/v3/${infuraKey}`),
+        network_id: 4,       // rinkeby's id
+        gas: 4500000,        // rinkeby has a lower block limit than mainnet
+        gasPrice: 10000000000
+    },
     // Useful for deploying to a public network.
     // NB: It's important to wrap the provider as a function.
     // ropsten: {
@@ -83,21 +89,21 @@ module.exports = {
 
   // Set default mocha options here, use special reporters etc.
   mocha: {
-    // timeout: 100000
+     timeout: 100000
   },
 
   // Configure your compilers
   compilers: {
     solc: {
-      // version: "0.5.1",    // Fetch exact version from solc-bin (default: truffle's version)
-      // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
-      // settings: {          // See the solidity docs for advice about optimization and evmVersion
-      //  optimizer: {
-      //    enabled: false,
-      //    runs: 200
-      //  },
-      //  evmVersion: "byzantium"
-      // }
+      version: "0.6.2",    // Fetch exact version from solc-bin (default: truffle's version)
+      docker: false,        // Use "0.5.1" you've installed locally with docker (default: false)
+      settings: {          // See the solidity docs for advice about optimization and evmVersion
+        optimizer: {
+            enabled: false,
+            runs: 200
+        },
+        evmVersion: "byzantium"
+       }
     }
   }
 }
